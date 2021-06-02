@@ -1,0 +1,8 @@
+# Autoscale your ”Hello Docker” deployment with
+kubectl autoscale deployment test345-hello-dep --cpu-percent=50 --min=1 --max=10
+
+# Make sure HPA is configured running
+kubectl get hpa
+
+# Create load for the app with busybox container
+kubectl run -i --tty load-generator --image=busybox /bin/sh while true; do wget -q -O- http://20.76.219.8 done
