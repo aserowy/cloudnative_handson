@@ -4,7 +4,7 @@ az provider register --namespace Microsoft.OperationsManagement
 az provider show -n Microsoft.OperationalInsights -o table
 az provider register --namespace Microsoft.OperationalInsights
 
-    az aks create --resource-group test-grp-345 --name testaks345 --node-count 3 --node-vm-size standard_b2ms --enable-addons monitoring --generate-ssh-keys --attach-acr testacr345
+az aks create --resource-group test-grp-345 --name testaks345 --node-count 3 --node-vm-size standard_b2ms --enable-addons monitoring --generate-ssh-keys --attach-acr testacr345
 
 az aks get-credentials --name testaks345 --resource-group test-grp-345
 

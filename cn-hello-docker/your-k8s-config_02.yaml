@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test345-hello-dep  # name of your deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test345-hello # your pod label, e.g. app: isv-hello
+  template:
+    metadata:
+      labels:
+        app: test345-hello # your pod label, e.g. app: isv-hello
+    spec:
+      containers:
+      - name: test345-hello-pod # prefix name for your pods
+        image: testacr345.azurecr.io/cn/hello-docker:v1.0 # your image name, eg. totipuarc.azurecr.io/isv-hello:1.0
+        env:
+        - name: AZSVC
+          value: "Azure Kubernetes Service"
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test345-hello-svc # name of your service in K8s, e.g. isv-hello-svc
+spec:
+  type: ClusterIP # Change to ClusterIP when deploying the ingress
+  ports:
+  - port: 80
+  selector:
+    app: test345-hello
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test345-hello-ingress # name of the ingress resource in k8s, e.g. isv-hello-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: alexander.tipuric.com # your hostname, can be ommited if no hostname, e.g. isvacademy.tipuric.com
+    http:
+      paths:
+      - backend:
+          serviceName: test345-hello-svc # name of your service in K8s, e.g. isv-hello-svc
+          servicePort: 80
+        path: /

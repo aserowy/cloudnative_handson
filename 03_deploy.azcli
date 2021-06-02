@@ -1,11 +1,11 @@
-kubectl apply -f xxx.yaml
+kubectl apply -f cn-hello-docker/your-k8s-config_01.yaml
 
 kubectl get services
 kubectl get pods
 
 kubectl get services --watch
 
-kubectl describe <type> <name>
-kubectl describe deployment cn-kube-hello-dep
+# kubectl describe <type> <name>
+kubectl describe deployment test345-hello-dep
 
-kubectl logs <podname>
+# kubectl logs <podname>

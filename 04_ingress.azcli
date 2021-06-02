@@ -1,0 +1,16 @@
+# install helm
+helm repo add nginx-stable https://helm.nginx.com/stable
+helm repo update
+
+# install ingress (change my-release)
+helm install my-release nginx-stable/nginx-ingress
+
+# get the external ip of the ingress service and create a record
+kubectl get svc --all-namespaces
+
+# az network dns record-set a add-record --resource-group test-grp-345 --zone-name tipuric.com --record-set-name www --ipv4-address 20.76.219.8
+
+# force new config
+kubectl apply -f cn-hello-docker/your-k8s-config_02.yaml --force
+
+kubectl get ingress
