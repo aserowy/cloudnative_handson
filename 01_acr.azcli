@@ -1,0 +1,21 @@
+az login
+az account show
+
+az account list
+az account set --subscription "Visual Studio Enterprise-Abonnement"
+
+az account list-locations -o table
+az group create --location westeurope --name test-grp-345
+az acr create --name testacr345 --resource-group test-grp-345 --sku Standard
+
+az acr update -n testacr345 --admin-enabled true
+
+docker ps -a
+docker images
+
+az acr login --name testacr345
+
+docker tag cn-hello-docker:v1.0 testacr345.azurecr.io/cn/hello-docker:v1.0
+docker push testacr345.azurecr.io/cn/hello-docker:v1.0
+
+az acr repository list --name testacr345

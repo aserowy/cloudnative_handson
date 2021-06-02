@@ -1,0 +1,11 @@
+kubectl apply -f xxx.yaml
+
+kubectl get services
+kubectl get pods
+
+kubectl get services --watch
+
+kubectl describe <type> <name>
+kubectl describe deployment cn-kube-hello-dep
+
+kubectl logs <podname>
